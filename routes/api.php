@@ -30,3 +30,17 @@ Route::get('proof-types/{id}', 'ProofTypesController@findById');
 Route::post('proof-types', 'ProofTypesController@save');
 Route::put('proof-types/{id}' , 'ProofTypesController@update');
 Route::delete('proof-types/{id}', 'ProofTypesController@delete');
+
+// AGE
+Route::get('age', 'AgeController@list'); 
+Route::get('age/{id}', 'AgeController@findById');
+Route::post('age', 'AgeController@save');
+Route::put('age/{id}' , 'AgeController@update');
+Route::delete('age/{id}', 'AgeController@delete');
+
+// RACE
+Route::get('race', 'RaceController@list'); 
+Route::get('race/{id}', 'RaceController@findById');
+Route::post('race', 'RaceController@save');
+Route::put('race/{id}' , 'RaceController@update');
+Route::delete('race/{id}', 'RaceController@delete');

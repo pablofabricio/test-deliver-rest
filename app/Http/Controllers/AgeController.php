@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ProofTypes;
+use App\Age;
 use Validator;
 
-class ProofTypesController extends Controller
+class AgeController extends Controller
 {
     public function list() 
     {
 
-        $list = ProofTypes::all();
+        $list = Age::all();
         if(count($list) < 1){
             return response()->json(["messsage" => "Records not found!"], 404);
         }
@@ -20,53 +20,55 @@ class ProofTypesController extends Controller
 
     public function findById($id)
     {
-        $proofTypes = ProofTypes::find($id);
-        if(is_null($proofTypes)){
-            return response()->json(["messsage" => "Record not found!"], 404);
+        $age = Age::find($id);
+        if(is_null($age)){
+            return response()->json(["messsge" => "Record not found!"], 404);
         }
-        return response()->json($proofTypes, 200);
+        return response()->json($age, 200);
     }
 
     public function save(Request $request)
     {
         $rules = [
-            'name' => 'required',
+            'initial_age' => 'required|integer',
+            'final_age'  => 'required|integer',
         ];
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
 
-        $proofTypes = ProofTypes::create($request->all());
-        return response()->json($proofTypes, 201);
+        $age = Age::create($request->all());
+        return response()->json($age, 201);
     }
 
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => 'required',
+            'initial_age' => 'required|integer',
+            'final_age'  => 'required|integer',
         ];
         $validator = Validator::make($request->all(), $rules);
         if($validator->fails()){
             return response()->json($validator->errors(), 400);
         }
 
-        $proofTypes = ProofTypes::find($id);
-        if(is_null($proofTypes)){
+        $age = Age::find($id);
+        if(is_null($age)){
             return response()->json(["messsage" => "Records not found!"], 404);
         }
-        $proofTypes->update($request->all());
-        return response()->json($proofTypes, 200);
+        $age->update($request->all());
+        return response()->json($age, 200);
 
     }
 
     public function delete($id)
     {
-        $proofTypes = ProofTypes::find($id);
-        if(is_null($proofTypes)){
+        $age = Age::find($id);
+        if(is_null($age)){
             return response()->json(["messsage" => "Records not found!"], 404);
         }
-        $proofTypes->delete();
+        $age->delete();
         return response()->json(null, 204);
     }
 }
