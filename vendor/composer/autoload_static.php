@@ -405,6 +405,7 @@ class ComposerStaticInit3e719ce9040a18b4955a0f5cfab66d86
     );
 
     public static $classMap = array (
+        'AgeTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AgeTableSeeder.php',
         'App\\Age' => __DIR__ . '/../..' . '/app/Age.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -3466,6 +3467,8 @@ class ComposerStaticInit3e719ce9040a18b4955a0f5cfab66d86
         'Psy\\VersionUpdater\\GitHubChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/GitHubChecker.php',
         'Psy\\VersionUpdater\\IntervalChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/IntervalChecker.php',
         'Psy\\VersionUpdater\\NoopChecker' => __DIR__ . '/..' . '/psy/psysh/src/VersionUpdater/NoopChecker.php',
+        'RaceTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RaceTableSeeder.php',
+        'RaceTypesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RaceTypesTableSeeder.php',
         'Ramsey\\Uuid\\BinaryUtils' => __DIR__ . '/..' . '/ramsey/uuid/src/BinaryUtils.php',
         'Ramsey\\Uuid\\Builder\\DefaultUuidBuilder' => __DIR__ . '/..' . '/ramsey/uuid/src/Builder/DefaultUuidBuilder.php',
         'Ramsey\\Uuid\\Builder\\DegradedUuidBuilder' => __DIR__ . '/..' . '/ramsey/uuid/src/Builder/DegradedUuidBuilder.php',
@@ -3512,6 +3515,8 @@ class ComposerStaticInit3e719ce9040a18b4955a0f5cfab66d86
         'Ramsey\\Uuid\\UuidFactory' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactory.php',
         'Ramsey\\Uuid\\UuidFactoryInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidFactoryInterface.php',
         'Ramsey\\Uuid\\UuidInterface' => __DIR__ . '/..' . '/ramsey/uuid/src/UuidInterface.php',
+        'RunnerRaceTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RunnerRaceTableSeeder.php',
+        'RunnerTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RunnerTableSeeder.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
         'SebastianBergmann\\CodeCoverage\\Driver\\Driver' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Driver/Driver.php',

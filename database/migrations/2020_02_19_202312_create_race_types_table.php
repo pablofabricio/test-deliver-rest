@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProofTypesTable extends Migration
+class CreateRaceTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateProofTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('proof_types', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+        Schema::create('race_types', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateProofTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('proof_types');
+        Schema::dropIfExists('race_types');
     }
 }

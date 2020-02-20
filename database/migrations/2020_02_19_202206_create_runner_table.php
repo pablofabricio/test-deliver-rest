@@ -14,8 +14,10 @@ class CreateRunnerTable extends Migration
     public function up()
     {
         Schema::create('runner', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->timestamps();
+            $table->increments('id');
+            $table->string('name');
+            $table->datetime('birth_date');
+            $table->string('CPF');
         });
     }
 

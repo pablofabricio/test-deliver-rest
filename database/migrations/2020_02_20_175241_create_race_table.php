@@ -14,10 +14,10 @@ class CreateRaceTable extends Migration
     public function up()
     {
         Schema::create('race', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->datetime('date');
-            $table->integer('id_proof_types');
-            $table->foreing('id_proof_types')->references('id')->on('proof_types');
+            $table->unsignedInteger('id_race_types');
+            $table->foreign('id_race_types')->references('id')->on('race_types');
             $table->softDeletes();
         });
     }
