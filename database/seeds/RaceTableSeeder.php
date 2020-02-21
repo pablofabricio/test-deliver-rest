@@ -14,23 +14,11 @@ class RaceTableSeeder extends Seeder
         $races= [
             [
                 'date' => "2020-02-10",
-                '' => 25,
+                'id_race_type' => 1,
             ],
             [
-                'initial_age' => 25,
-                'final_age' => 35,
-            ],
-            [
-                'initial_age' => 35,
-                'final_age' => 45,
-            ],
-            [
-                'initial_age' => 45,
-                'final_age' => 55,
-            ],
-            [
-                'initial_age' => 55,
-                'final_age' => 150,
+                'date' => "2020-01-10",
+                'id_race_type' => 2,
             ]
         ];
         DB::table('race')->insert($races);

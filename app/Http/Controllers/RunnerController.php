@@ -72,7 +72,5 @@ class RunnerController extends Controller
         $runner->delete();
         return response()->json(null, 204);
     }
-
-
 }
 

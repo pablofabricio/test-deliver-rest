@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRunnerRace extends Migration
+class CreateRunnerRaceTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,8 +17,8 @@ class CreateRunnerRace extends Migration
             $table->increments('id');
             $table->unsignedInteger('id_runner');
             $table->unsignedInteger('id_race');
-            $table->datetime('initial_time');
-            $table->datetime('final_time');
+            $table->time('initial_time');
+            $table->time('final_time');
             $table->foreign('id_runner')->references('id')->on('runner');
             $table->foreign('id_race')->references('id')->on('race');
             $table->softDeletes();

@@ -3,15 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\ProofTypes;
+use App\RaceTypes;
 use Validator;
 
-class ProofTypesController extends Controller
+class RaceTypesController extends Controller
 {
     public function list() 
     {
 
-        $list = ProofTypes::all();
+        $list = RaceTypes::all();
         if(count($list) < 1){
             return response()->json(["messsage" => "Records not found!"], 404);
         }
@@ -20,11 +20,11 @@ class ProofTypesController extends Controller
 
     public function findById($id)
     {
-        $proofTypes = ProofTypes::find($id);
-        if(is_null($proofTypes)){
+        $raceTypes = RaceTypes::find($id);
+        if(is_null($raceTypes)){
             return response()->json(["messsage" => "Record not found!"], 404);
         }
-        return response()->json($proofTypes, 200);
+        return response()->json($raceTypes, 200);
     }
 
     public function save(Request $request)
@@ -37,8 +37,8 @@ class ProofTypesController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $proofTypes = ProofTypes::create($request->all());
-        return response()->json($proofTypes, 201);
+        $raceTypes = RaceTypes::create($request->all());
+        return response()->json($raceTypes, 201);
     }
 
     public function update(Request $request, $id)
@@ -51,22 +51,22 @@ class ProofTypesController extends Controller
             return response()->json($validator->errors(), 400);
         }
 
-        $proofTypes = ProofTypes::find($id);
-        if(is_null($proofTypes)){
+        $raceTypes = RaceTypes::find($id);
+        if(is_null($raceTypes)){
             return response()->json(["messsage" => "Records not found!"], 404);
         }
-        $proofTypes->update($request->all());
-        return response()->json($proofTypes, 200);
+        $raceTypes->update($request->all());
+        return response()->json($raceTypes, 200);
 
     }
 
     public function delete($id)
     {
-        $proofTypes = ProofTypes::find($id);
-        if(is_null($proofTypes)){
+        $raceTypes = RaceTypes::find($id);
+        if(is_null($raceTypes)){
             return response()->json(["messsage" => "Records not found!"], 404);
         }
-        $proofTypes->delete();
+        $raceTypes->delete();
         return response()->json(null, 204);
     }
 }

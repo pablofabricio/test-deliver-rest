@@ -10,7 +10,7 @@ class Race extends Model
     protected $table = 'race';
 
     protected $fillable = [
-        'id_proof_types',
-        'date'
+        'date',
+        'id_race_race_types'
     ];
 }

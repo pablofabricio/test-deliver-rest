@@ -30,7 +30,6 @@ class RaceController extends Controller
     public function save(Request $request)
     {
         $rules = [
-            'id_proof_types' => 'required|integer',
             'date'  => 'required|date_format:Y-m-d',
         ];
         $validator = Validator::make($request->all(), $rules);
@@ -45,7 +44,6 @@ class RaceController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'id_proof_types' => 'required|integer',
             'date'  => 'required|date_format:Y-m-d',
         ];
         $validator = Validator::make($request->all(), $rules);

@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 | Here is where you can register API routes for your application. These
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
-|
+|w
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
@@ -25,11 +25,11 @@ Route::put('runner/{id}' , 'RunnerController@update');
 Route::delete('runner/{id}', 'RunnerController@delete');
 
 // PROOF TYPES
-Route::get('proof-types', 'ProofTypesController@list'); 
-Route::get('proof-types/{id}', 'ProofTypesController@findById');
-Route::post('proof-types', 'ProofTypesController@save');
-Route::put('proof-types/{id}' , 'ProofTypesController@update');
-Route::delete('proof-types/{id}', 'ProofTypesController@delete');
+Route::get('race-types', 'RaceTypesController@list'); 
+Route::get('race-types/{id}', 'RaceTypesController@findById');
+Route::post('race-types', 'RaceTypesController@save');
+Route::put('race-types/{id}' , 'RaceTypesController@update');
+Route::delete('race-types/{id}', 'RaceTypesController@delete');
 
 // AGE
 Route::get('age', 'AgeController@list'); 
@@ -44,3 +44,10 @@ Route::get('race/{id}', 'RaceController@findById');
 Route::post('race', 'RaceController@save');
 Route::put('race/{id}' , 'RaceController@update');
 Route::delete('race/{id}', 'RaceController@delete');
+
+// RUNNER RACE
+Route::get('runner-race/{id}', 'RunnerRaceController@overallClassification'); 
+Route::get('runner-race/age/{id}', 'RunnerRaceController@classificationByAge');
+Route::post('runner-race', 'RaceController@save');
+Route::put('runner-race/{id}' , 'RaceController@update');
+Route::delete('runner-race/{id}', 'RaceController@delete');

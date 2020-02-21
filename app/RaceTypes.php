@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProofTypes extends Model
+class RaceTypes extends Model
 {
     public $timestamps = false;
-    protected $table = 'proof_types';
+    protected $table = 'race_types';
 
     protected $fillable = [
         'name'

@@ -16,8 +16,8 @@ class CreateRaceTable extends Migration
         Schema::create('race', function (Blueprint $table) {
             $table->increments('id');
             $table->datetime('date');
-            $table->unsignedInteger('id_race_types');
-            $table->foreign('id_race_types')->references('id')->on('race_types');
+            $table->unsignedInteger('id_race_type');
+            $table->foreign('id_race_type')->references('id')->on('race_types');
             $table->softDeletes();
         });
     }
