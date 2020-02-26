@@ -4,14 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Age;
+use App\Repositories\AgeRepository;
 use Validator;
 
 class AgeController extends Controller
 {
+    private $ageRepository;
+    
+    public function __construct(AgeRepository $ageRepository) 
+    {
+        $this->ageRepository = $ageRepository;
+    }
+
     public function list() 
     {
-
-        $list = Age::all();
+        
+        $list = $this->ageRepository->findAll();
         if(count($list) < 1){
             return response()->json(["messsage" => "Records not found!"], 404);
         }
