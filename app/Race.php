@@ -11,6 +11,6 @@ class Race extends Model
 
     protected $fillable = [
         'date',
-        'id_race_race_types'
+        'id_race_type'
     ];
 }

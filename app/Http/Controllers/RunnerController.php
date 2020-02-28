@@ -1,19 +1,24 @@
 <?php
+
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Runner;
-use Validator;
-
+use App\Repositories\RunnerRepository;
 
 class RunnerController extends Controller
 {
+
+    private $repository;
+    
+    public function __construct(RunnerRepository $runnerRepository) 
+    {
+        $this->repository = $runnerRepository;
+    }
+
     public function list() 
     {
-
-        $list = Runner::all();
-        if(count($list) < 1){
+        $list = $this->repository->getAll();
+        if (count($list) < 1) {
             return response()->json(["messsage" => "Records not found!"], 404);
         }
         return response()->json($list, 200);
@@ -21,56 +26,36 @@ class RunnerController extends Controller
 
     public function findById($id)
     {
-        $runner = Runner::find($id);
-        if(is_null($runner)){
+        $data = $this->repository->getById($id);
+        if(is_null($data)){
             return response()->json(["messsage" => "Record not found!"], 404);
         }
-        return response()->json($runner, 200);
+        return response()->json($data, 200);
     }
 
     public function save(Request $request)
     {
-        $rules = [
-            'name' => 'required|min:3',
-            'CPF'  => 'required|min:11|max:11',
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
-        }
-
-        $runner = Runner::create($request->all());
-        return response()->json($runner, 201);
+        $data = $this->repository->create($request->all());
+        return response()->json($data, 201);
     }
 
     public function update(Request $request, $id)
     {
-        $rules = [
-            'name' => 'required|min:3',
-            'CPF'  => 'required|min:11|max:11',
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
+        $data = $this->repository->getById($id);
+        if (is_null($data)) {
+            return response()->json(["messsage" => "Record not found!"], 404);
         }
-
-        $runner = Runner::find($id);
-        if(is_null($runner)){
-            return response()->json(["messsage" => "Records not found!"], 404);
-        }
-        $runner->update($request->all());
-        return response()->json($runner, 200);
-
+        $data = $this->repository->update($request->all(), $id);
+        return response()->json($data, 200);
     }
 
     public function delete($id)
     {
-        $runner = Runner::find($id);
-        if(is_null($runner)){
-            return response()->json(["messsage" => "Records not found!"], 404);
+        $data = $this->repository->getById($id);
+        if (is_null($data)) {
+            return response()->json(["messsage" => "Record not found!"], 404);
         }
-        $runner->delete();
-        return response()->json(null, 204);
+        $data = $this->repository->delete($id);
+        return response()->json(null, 200);
     }
 }
-

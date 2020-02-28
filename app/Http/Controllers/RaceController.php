@@ -3,16 +3,22 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Race;
-use Validator;
+use App\Repositories\RaceRepository;
 
 class RaceController extends Controller
 {
+
+    private $repository;
+    
+    public function __construct(RaceRepository $raceRepository) 
+    {
+        $this->repository = $raceRepository;
+    }
+
     public function list() 
     {
-
-        $list = Race::all();
-        if(count($list) < 1){
+        $list = $this->repository->getAll();
+        if (count($list) < 1) {
             return response()->json(["messsage" => "Records not found!"], 404);
         }
         return response()->json($list, 200);
@@ -20,53 +26,36 @@ class RaceController extends Controller
 
     public function findById($id)
     {
-        $race = Race::find($id);
-        if(is_null($race)){
+        $data = $this->repository->getById($id);
+        if(is_null($data)){
             return response()->json(["messsage" => "Record not found!"], 404);
         }
-        return response()->json($race, 200);
+        return response()->json($data, 200);
     }
 
     public function save(Request $request)
     {
-        $rules = [
-            'date'  => 'required|date_format:Y-m-d',
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
-        }
-
-        $race = Race::create($request->all());
-        return response()->json($race, 201);
+        $data = $this->repository->create($request->all());
+        return response()->json($data, 201);
     }
 
     public function update(Request $request, $id)
     {
-        $rules = [
-            'date'  => 'required|date_format:Y-m-d',
-        ];
-        $validator = Validator::make($request->all(), $rules);
-        if($validator->fails()){
-            return response()->json($validator->errors(), 400);
+        $data = $this->repository->getById($id);
+        if (is_null($data)) {
+            return response()->json(["messsage" => "Record not found!"], 404);
         }
-
-        $race = Race::find($id);
-        if(is_null($race)){
-            return response()->json(["messsage" => "Records not found!"], 404);
-        }
-        $race->update($request->all());
-        return response()->json($race, 200);
-
+        $data = $this->repository->update($request->all(), $id);
+        return response()->json($data, 200);
     }
 
     public function delete($id)
     {
-        $race = Race::find($id);
-        if(is_null($race)){
-            return response()->json(["messsage" => "Records not found!"], 404);
+        $data = $this->repository->getById($id);
+        if (is_null($data)) {
+            return response()->json(["messsage" => "Record not found!"], 404);
         }
-        $race->delete();
-        return response()->json(null, 204);
+        $data = $this->repository->delete($id);
+        return response()->json(null, 200);
     }
 }

@@ -24,7 +24,7 @@ Route::post('runner', 'RunnerController@save');
 Route::put('runner/{id}' , 'RunnerController@update');
 Route::delete('runner/{id}', 'RunnerController@delete');
 
-// PROOF TYPES
+// RACES TYPES
 Route::get('race-types', 'RaceTypesController@list'); 
 Route::get('race-types/{id}', 'RaceTypesController@findById');
 Route::post('race-types', 'RaceTypesController@save');
@@ -46,8 +46,12 @@ Route::put('race/{id}' , 'RaceController@update');
 Route::delete('race/{id}', 'RaceController@delete');
 
 // RUNNER RACE
-Route::get('runner-race/{id}', 'RunnerRaceController@overallClassification'); 
-Route::get('runner-race/age/{id}', 'RunnerRaceController@classificationByAge');
-Route::post('runner-race', 'RaceController@save');
-Route::put('runner-race/{id}' , 'RaceController@update');
-Route::delete('runner-race/{id}', 'RaceController@delete');
+Route::get('runner-race/', 'RunnerRaceController@list'); 
+Route::get('runner-race/{id}', 'RunnerRaceController@findById');
+Route::post('runner-race', 'RunnerRaceController@save');
+Route::put('runner-race/{id}' , 'RunnerRaceController@update');
+Route::delete('runner-race/{id}', 'RunnerRaceController@delete');
+
+// CLASSIFICATION
+Route::get('classification/all', 'ClassificationController@overallClassification'); 
+Route::get('classfication/age', 'ClassificationController@classificationByAge');
