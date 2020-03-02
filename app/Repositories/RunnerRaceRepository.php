@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\RunnerRace;
 use Validator;
+use Carbon;
 
 class RunnerRaceRepository implements RepositoryInterface
 {
@@ -32,7 +33,7 @@ class RunnerRaceRepository implements RepositoryInterface
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-
+        
         // VERIFIER IF EXISTS RUNNER AND RACE
         $runner = $this->modelClass::find($data['id_runner']);
         if (is_null($runner)) {
@@ -42,6 +43,11 @@ class RunnerRaceRepository implements RepositoryInterface
         if (is_null($race)) {
             return response()->json(["messsage" => "Race not found!"], 404);
         }
+        
+        // CALCULATING THE RACE TIME 
+        $firstTime = new \DateTime($data['final_time']);
+        $result = $firstTime->diff(new \DateTime($data['initial_time']));
+        $data['race_time'] = $result->h.':'. $result->i;
 
         // CREATE
         return $this->modelClass::create($data);
@@ -73,6 +79,14 @@ class RunnerRaceRepository implements RepositoryInterface
                 return response()->json(["messsage" => "Race not found!"], 404);
             }
         }
+
+        // VERIFIER IF EXISTS INITIAL TIME OR FINAL_TIME
+        // if (in_array("final_time", $data)) {
+        //     $firstTime = new \DateTime($data['final_time']);   
+        // }
+        // if (in_array("initial_time", $data)) {
+            
+        // }
 
         $this->modelClass::where('id', $id)->update($data);
         return $this->modelClass::find($id);

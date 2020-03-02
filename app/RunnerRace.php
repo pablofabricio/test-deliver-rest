@@ -13,6 +13,7 @@ class RunnerRace extends Model
         'id_runner',
         'id_race',
         'initial_time',
-        'final_time'
+        'final_time',
+        'race_time'
     ];
 }
