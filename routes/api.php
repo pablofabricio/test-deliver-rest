@@ -54,4 +54,4 @@ Route::delete('runner-race/{id}', 'RunnerRaceController@delete');
 
 // CLASSIFICATION
 Route::get('classification/all', 'ClassificationController@overallClassification'); 
-Route::get('classfication/age', 'ClassificationController@classificationByAge');
+Route::get('classification/age', 'ClassificationController@classificationByAge');

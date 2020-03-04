@@ -17,11 +17,13 @@ class CreateRunnerRaceTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('id_runner');
             $table->unsignedInteger('id_race');
+            $table->unsignedInteger('id_age');
             $table->time('initial_time');
             $table->time('final_time');
             $table->time('race_time');
             $table->foreign('id_runner')->references('id')->on('runner');
             $table->foreign('id_race')->references('id')->on('race');
+            $table->foreign('id_age')->references('id')->on('age');
             $table->softDeletes();
         });
     }

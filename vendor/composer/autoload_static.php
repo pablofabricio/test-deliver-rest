@@ -405,6 +405,7 @@ class ComposerStaticInit3e719ce9040a18b4955a0f5cfab66d86
     );
 
     public static $classMap = array (
+        'AgeTableSeeder' => __DIR__ . '/../..' . '/database/seeds/AgeTableSeeder.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -413,6 +414,7 @@ class ComposerStaticInit3e719ce9040a18b4955a0f5cfab66d86
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Auth\\VerificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerificationController.php',
+        'App\\Http\\Controllers\\ClassificationController' => __DIR__ . '/../..' . '/app/Http/Controllers/ClassificationController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\RaceController' => __DIR__ . '/../..' . '/app/Http/Controllers/RaceController.php',
         'App\\Http\\Controllers\\RaceTypesController' => __DIR__ . '/../..' . '/app/Http/Controllers/RaceTypesController.php',
@@ -435,6 +437,7 @@ class ComposerStaticInit3e719ce9040a18b4955a0f5cfab66d86
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Race' => __DIR__ . '/../..' . '/app/Race.php',
         'App\\RaceTypes' => __DIR__ . '/../..' . '/app/RaceTypes.php',
+        'App\\Repositories\\ClassificationRepository' => __DIR__ . '/../..' . '/app/Repositories/ClassificationRepository.php',
         'App\\Repositories\\RaceRepository' => __DIR__ . '/../..' . '/app/Repositories/RaceRepository.php',
         'App\\Repositories\\RaceTypesRepository' => __DIR__ . '/../..' . '/app/Repositories/RaceTypesRepository.php',
         'App\\Repositories\\RepositoryInterface' => __DIR__ . '/../..' . '/app/Repositories/RepositoryInterface.php',

@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RaceTypesTableSeeder::class);
         $this->call(RaceTableSeeder::class);
+        $this->call(AgeTableSeeder::class);
         $this->call(RunnerTableSeeder::class);
         $this->call(RunnerRaceTableSeeder::class);
     }

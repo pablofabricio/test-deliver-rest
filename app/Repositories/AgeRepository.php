@@ -2,12 +2,12 @@
 
 namespace App\Repositories;
 
-use App\Race;
+use App\Age;
 use Validator;
 
-class RaceRepository implements RepositoryInterface
+class AgeRepository implements RepositoryInterface
 {
-    protected $modelClass = Race::class;
+    protected $modelClass = Age::class;
 
     public function getAll() 
     {
@@ -22,8 +22,8 @@ class RaceRepository implements RepositoryInterface
     public function create(array $data)
     {
         $rules = [
-            'date'  => 'required|date_format:Y-m-d',
-            'id_race_type' => 'required|integer',
+            'initial_age'  => 'required|integer',
+            'final_age'  => 'required|integer',
         ];
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
@@ -35,8 +35,8 @@ class RaceRepository implements RepositoryInterface
     public function update(array $data, $id)
     {
         $rules = [
-            'date'  => 'date_format:Y-m-d',
-            'id_race_type' => 'integer',
+            'initial_age'  => 'required',
+            'final_age'  => 'required',
         ];
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
@@ -48,6 +48,7 @@ class RaceRepository implements RepositoryInterface
 
     public function delete($id)
     {
-        return $this->modelClass::destroy($id);
+        $data = $this->modelClass::find($id);
+        return $data->delete($id);
     }
 }

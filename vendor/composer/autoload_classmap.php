@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AgeTableSeeder' => $baseDir . '/database/seeds/AgeTableSeeder.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Auth\\ConfirmPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ConfirmPasswordController.php',
@@ -14,6 +15,7 @@ return array(
     'App\\Http\\Controllers\\Auth\\RegisterController' => $baseDir . '/app/Http/Controllers/Auth/RegisterController.php',
     'App\\Http\\Controllers\\Auth\\ResetPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ResetPasswordController.php',
     'App\\Http\\Controllers\\Auth\\VerificationController' => $baseDir . '/app/Http/Controllers/Auth/VerificationController.php',
+    'App\\Http\\Controllers\\ClassificationController' => $baseDir . '/app/Http/Controllers/ClassificationController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\RaceController' => $baseDir . '/app/Http/Controllers/RaceController.php',
     'App\\Http\\Controllers\\RaceTypesController' => $baseDir . '/app/Http/Controllers/RaceTypesController.php',
@@ -36,6 +38,7 @@ return array(
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Race' => $baseDir . '/app/Race.php',
     'App\\RaceTypes' => $baseDir . '/app/RaceTypes.php',
+    'App\\Repositories\\ClassificationRepository' => $baseDir . '/app/Repositories/ClassificationRepository.php',
     'App\\Repositories\\RaceRepository' => $baseDir . '/app/Repositories/RaceRepository.php',
     'App\\Repositories\\RaceTypesRepository' => $baseDir . '/app/Repositories/RaceTypesRepository.php',
     'App\\Repositories\\RepositoryInterface' => $baseDir . '/app/Repositories/RepositoryInterface.php',
