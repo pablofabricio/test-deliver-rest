@@ -12,6 +12,7 @@ class RunnerRace extends Model
     protected $fillable = [
         'id_runner',
         'id_race',
+        'id_age',
         'initial_time',
         'final_time',
         'race_time'

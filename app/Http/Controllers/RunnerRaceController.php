@@ -39,16 +39,6 @@ class RunnerRaceController extends Controller
         return response()->json($data, 201);
     }
 
-    public function update(Request $request, $id)
-    {
-        $data = $this->repository->getById($id);
-        if (is_null($data)) {
-            return response()->json(["messsage" => "Record not found!"], 404);
-        }
-        $data = $this->repository->update($request->all(), $id);
-        return response()->json($data, 200);
-    }
-
     public function delete($id)
     {
         $data = $this->repository->getById($id);

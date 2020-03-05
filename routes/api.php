@@ -49,7 +49,6 @@ Route::delete('race/{id}', 'RaceController@delete');
 Route::get('runner-race/', 'RunnerRaceController@list'); 
 Route::get('runner-race/{id}', 'RunnerRaceController@findById');
 Route::post('runner-race', 'RunnerRaceController@save');
-Route::put('runner-race/{id}' , 'RunnerRaceController@update');
 Route::delete('runner-race/{id}', 'RunnerRaceController@delete');
 
 // CLASSIFICATION

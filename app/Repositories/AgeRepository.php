@@ -35,8 +35,8 @@ class AgeRepository implements RepositoryInterface
     public function update(array $data, $id)
     {
         $rules = [
-            'initial_age'  => 'required',
-            'final_age'  => 'required',
+            'initial_age'  => 'integer',
+            'final_age'  => 'integer',
         ];
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
