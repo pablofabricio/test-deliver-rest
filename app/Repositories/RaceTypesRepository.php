@@ -11,7 +11,11 @@ class RaceTypesRepository implements RepositoryInterface
 
     public function getAll() 
     {
-        return $this->modelClass::all();
+        $data = $this->modelClass::all();
+        if (count($data) < 1) {
+            throw new Exception("Records not found!");
+        }
+        return $data;
     }
 
     public function getById($id)

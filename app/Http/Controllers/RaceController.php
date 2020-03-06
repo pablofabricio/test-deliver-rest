@@ -17,11 +17,12 @@ class RaceController extends Controller
 
     public function list() 
     {
-        $list = $this->repository->getAll();
-        if (count($list) < 1) {
-            return response()->json(["messsage" => "Records not found!"], 404);
+        try {
+            $list = $this->repository->getAll();
+            return response()->json($list, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 404);
         }
-        return response()->json($list, 200);
     }
 
     public function findById($id)
