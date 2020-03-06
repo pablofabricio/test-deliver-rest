@@ -16,7 +16,11 @@ class RunnerRepository implements RepositoryInterface
 
     public function getById($id)
     {
-        return $this->modelClass::find($id);
+        if ($this->verifyIfExists($id)) {
+            return $this->modelClass::find($id);
+        } else {
+            throw new Exception("Record not found");
+        }
     }
 
     public function create(array $data)
@@ -28,7 +32,7 @@ class RunnerRepository implements RepositoryInterface
         ];
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            throw new Exception($validator->errors());
         }
         return $this->modelClass::create($data);
     }
@@ -41,16 +45,29 @@ class RunnerRepository implements RepositoryInterface
             'CPF' => 'required|min:11',
         ];
         $validator = Validator::make($data, $rules);
-        if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+        if ($this->verifyIfExists($id)) {
+            $this->modelClass::where('id', $id)->update($data);
+            return $this->modelClass::find($id);
+        } else {
+            throw new Exception("Record not found");
         }
-        $this->modelClass::where('id', $id)->update($data);
-        return $this->modelClass::find($id);
     }
 
     public function delete($id)
     {
-        $data = $this->modelClass::find($id);
-        return $data->delete($id);
+        if ($this->verifyIfExists($id)) {
+            $data = $this->modelClass::find($id);
+            return $data->delete($id);
+        } else {
+            throw new Exception("Record not found");
+        }
+    }
+
+    private function verifyIfExists($id)
+    {
+        if (is_null($this->modelClass::find($id))) {
+            return false;
+        }
+        return true;
     }
 }

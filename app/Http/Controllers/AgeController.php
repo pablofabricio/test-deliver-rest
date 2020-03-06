@@ -26,36 +26,41 @@ class AgeController extends Controller
 
     public function findById($id)
     {
-        $data = $this->repository->getById($id);
-        if(is_null($data)){
-            return response()->json(["messsage" => "Record not found!"], 404);
+        try {
+            $data = $this->repository->getById($id);
+            return response()->json($data, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 400);
         }
-        return response()->json($data, 200);
     }
 
     public function save(Request $request)
     {
-        $data = $this->repository->create($request->all());
-        return response()->json($data, 201);
+        try {
+            $data = $this->repository->create($request->all());
+            return response()->json($data, 201);
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 400);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        $data = $this->repository->getById($id);
-        if (is_null($data)) {
-            return response()->json(["messsage" => "Record not found!"], 404);
+        try {
+            $data = $this->repository->update($request->all(), $id);
+            return response()->json($data, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 400);
         }
-        $data = $this->repository->update($request->all(), $id);
-        return response()->json($data, 200);
     }
 
     public function delete($id)
     {
-        $data = $this->repository->getById($id);
-        if (is_null($data)) {
-            return response()->json(["messsage" => "Record not found!"], 404);
+        try {
+            $data = $this->repository->delete($id);
+            return response()->json(null, 200);
+        } catch (\Exception $e) {
+            return response()->json(["message" => $e->getMessage()], 404);
         }
-        $data = $this->repository->delete($id);
-        return response()->json(null, 200);
     }
 }

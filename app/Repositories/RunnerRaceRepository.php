@@ -9,6 +9,7 @@ use App\Runner;
 use Validator;
 use Carbon;
 use Illuminate\Support\Facades\DB;
+use Exception;
 
 class RunnerRaceRepository implements RepositoryInterface
 {
@@ -21,7 +22,11 @@ class RunnerRaceRepository implements RepositoryInterface
 
     public function getById($id)
     {
-        return $this->modelClass::find($id);
+        if ($this->verifyIfExists($id)) {
+            return $this->modelClass::find($id);
+        } else {
+            throw new Exception("Record not found");
+        }
     }
 
     public function create(array $data)
@@ -36,19 +41,56 @@ class RunnerRaceRepository implements RepositoryInterface
         ];
         $validator = Validator::make($data, $rules);
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            throw new Exception($validator->errors());
         }
 
+        // VALIDATING THE VALUES
+        $this->verification($data);
+
+        // CALCULATING THE RACE TIME 
+        $data['race_time'] = $this->calculateRaceTime($data);
+
+        // CREATE
+        return $this->modelClass::create($data);
+    }
+    
+    public function delete($id)
+    {
+        if ($this->verifyIfExists($id)) {
+            $data = $this->modelClass::find($id);
+            return $data->delete($id);
+        } else {
+            throw new Exception("Record not found");
+        }
+    }
+
+    private function verifyIfExists($id)
+    {
+        if (is_null($this->modelClass::find($id))) {
+            return false;
+        }
+        return true;
+    }
+
+    private function calculateRaceTime($data)
+    {
+        $firstTime = new \DateTime($data['final_time']);
+        $result = $firstTime->diff(new \DateTime($data['initial_time']));
+        return $result->h.':'. $result->i;
+    }
+
+    private function verification($data) 
+    {
         // VERIFIER IF EXISTS RUNNER
         $runner = Runner::find($data['id_runner']);
         if (is_null($runner)) {
-            return response()->json(["messsage" => "Runner not found!"], 404);
+            throw new Exception("Runner not found!");
         }
 
         // VERIFIER IF EXISTS RACE
         $race = Race::find($data['id_race']);
         if (is_null($race)) {
-            return response()->json(["messsage" => "Race not found!"], 404);
+            throw new Exception("Race not found!");
         }
         
         // VERIFIY IF RUNNER IS OVER 18 YEARS OLD
@@ -59,7 +101,7 @@ class RunnerRaceRepository implements RepositoryInterface
             ->where('id', $data['id_runner'])
             ->get();
         if ($runner[0]['AGE'] < 18) {
-            return response()->json(["messsage" => "Runner is under 18!"], 404);
+            throw new Exception("Runner is under 18!");
         }
         
         // VERIFY IF RUNNER NOT HAVE RACE REGISTERED IN THE SAME DATA
@@ -73,44 +115,20 @@ class RunnerRaceRepository implements RepositoryInterface
             ->get();
 
         for ($i = 0; $i < count($registeredRace); $i++) {
-            $data = Race::where('id', $registeredRace[$i]['id_race'])
+            $a = Race::where('id', $registeredRace[$i]['id_race'])
                 ->where('date', $choosenRaceDate[0]['date'])
                 ->get();
-            if (!is_null($data)) {
-                return response()
-                    ->json(
-                        ["messsage" => 
-                            "Runner is already registered for a race on the same date"
-                        ], 
-                        404
-                    );
+            if (count($a) > 0) {
+                throw new Exception("Runner is already registered for a race on the same date");
             }
         }
 
         // VERIFIER IF EXISTS AGE
         $age = Age::find($data['id_age']);
         if (is_null($age)) {
-            return response()->json(["messsage" => "Age not found!"], 404);
+            throw new Exception("Age not found!");
         }
-        
-        // CALCULATING THE RACE TIME 
-        $data['race_time'] = $this->calculateRaceTime($data);
 
-        // CREATE
-        return $this->modelClass::create($data);
-    }
-    
-    public function delete($id)
-    {
-        $data = $this->modelClass::find($id);
-        return $data->delete($id);
-    }
-
-    private function calculateRaceTime($data)
-    {
-        $firstTime = new \DateTime($data['final_time']);
-        $result = $firstTime->diff(new \DateTime($data['initial_time']));
-        return $result->h.':'. $result->i;
     }
     
     public function update($data, $id) {}
