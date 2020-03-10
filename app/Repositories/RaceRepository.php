@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Race;
 use Validator;
+use App\Http\Requests;
 
 class RaceRepository implements RepositoryInterface
 {
